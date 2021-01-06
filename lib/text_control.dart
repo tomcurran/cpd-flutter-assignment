@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
 
-class TextControl extends StatelessWidget {
-  final Function onButtonPressed;
+import 'text_output.dart';
 
-  TextControl(this.onButtonPressed);
+class TextControl extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _TextControl();
+  }
+}
+
+class _TextControl extends State<TextControl> {
+  var _counter = 0;
+
+  String get displayText => 'Pressed $_counter times!';
+
+  void _onButtonPressed() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      child: Text('Press me'),
-      onPressed: onButtonPressed,
+    return Column(
+      children: [
+        TextOutput(displayText),
+        RaisedButton(
+          child: Text('Press me'),
+          onPressed: _onButtonPressed,
+        )
+      ],
     );
   }
 }
